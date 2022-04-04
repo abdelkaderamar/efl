@@ -1,0 +1,24 @@
+
+Add_Library ( strat_sim_lib
+  stock_data.cpp
+  csv_parser.cpp
+  simulator_close_fixed.cpp
+  book.cpp
+  abstract_simulator.cpp
+  simulator_config.cpp
+  book_config.cpp
+  csv_helper.cpp
+  file_helper.cpp
+  config_result.cpp
+  )
+
+#Target_link_libraries(strat_sim_lib PRIVATE nlohmann_json::nlohmann_json)
+
+Add_Executable ( strat_sim
+  strat_sim.cpp )
+
+Target_Link_Libraries ( strat_sim
+  strat_sim_lib
+  ${Boost_PROGRAM_OPTIONS_LIBRARY}
+  pthread
+  )
