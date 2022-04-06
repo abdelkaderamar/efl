@@ -18,10 +18,12 @@ namespace efl {
   };
 
   struct config_result_t {
+
+    config_result_t(const std::string& stock) : _stock{stock} {}
+
+    std::string _stock;
     book_config_t _config;
     std::vector<period_result_t> _results;
-
-
 
     double total_pnl() const;
 
