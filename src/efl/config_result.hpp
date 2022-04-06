@@ -15,6 +15,10 @@ namespace efl {
     book_t _book;
     double _price_change;
     std::string to_csv();
+
+    bool operator < (const period_result_t& other) {
+      return _start < other._start;
+    }
   };
 
   struct config_result_t {
@@ -28,6 +32,10 @@ namespace efl {
     double total_pnl() const;
 
     std::string to_csv();
+
+    bool operator < (const config_result_t& other) {
+      return _stock < other._stock;
+    } 
   };
 
 }
