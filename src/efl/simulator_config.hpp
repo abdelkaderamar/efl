@@ -20,8 +20,10 @@ namespace efl {
     std::string total_amount_type;
     interval_t total_amount;
     interval_t order_amount;
-    std::string delta_type;
-    interval_t delta_value;
+    std::string delta_buy_type;
+    interval_t delta_buy_value;
+    std::string delta_sell_type;
+    interval_t delta_sell_value;
     interval_t empty_book_duration;
     double fees;
     double tax;

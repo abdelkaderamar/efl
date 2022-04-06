@@ -8,7 +8,8 @@ namespace efl {
   struct book_config_t {
     double total_amount;
     double order_amount;
-    double delta;
+    double delta_buy;
+    double delta_sell;
     double fees;
     double tax;
     int empty_book_duration;

@@ -16,4 +16,7 @@ endif()
 #  Add_Definitions ( "-DBOOST_LOG_DYN_LINK" )
 #Endif ()
 
+Include_Directories (${CMAKE_SOURCE_DIR}/src)
+
 add_subdirectory ( src )
+
