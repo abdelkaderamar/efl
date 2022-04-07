@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -10,9 +12,23 @@
 
 namespace efl {
 
+  struct result_key_t {
+    std::string _stock;
+    date::year_month_day _start;
+    date::year_month_day _end;
+
+    bool operator < (const result_key_t& other) const {
+      if (_stock == other._stock) {
+        if (_start == other._start) return _end < other._end;
+        else return _start < other._start;
+      }
+      return _stock < other._stock;
+    }
+  };
+
   struct period_result_t {
     date::year_month_day _start, _end;
-    book_t _book;
+    std::shared_ptr<book_t> _book;
     double _price_change;
     std::string to_csv();
 
@@ -27,7 +43,7 @@ namespace efl {
 
     std::string _stock;
     book_config_t _config;
-    std::vector<period_result_t> _results;
+    std::map<result_key_t, period_result_t> _results;
 
     double total_pnl() const;
 

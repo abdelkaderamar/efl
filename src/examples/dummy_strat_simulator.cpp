@@ -30,7 +30,12 @@ namespace efl
                         ._book = b,
                         ._price_change = d.price_change(),
                     };
-                    config_result._results.push_back(period_result);
+                    result_key_t key {
+                        ._stock = d.get_stock(),
+                        ._start = d.start_period(),
+                        ._end = d.end_period(),
+                    };
+                    config_result._results[key] = period_result;
                 }
                 _sim_results[index].push_back(config_result);
                 ++index;
@@ -38,29 +43,35 @@ namespace efl
         }
     }
 
-    book_t dummy_strat_simulator::simulate(const stock_data_t &sd, const book_config_t &book_config) 
+    std::shared_ptr<book_t> dummy_strat_simulator::simulate(const stock_data_t &sd, const book_config_t &book_config) 
     {
-        book_t b{book_config};
+        std::shared_ptr<book_t> b = std::make_shared<book_t>(book_config);
         auto &data = sd.get_data();
+        _last_close = -1.0;
         for (auto &d : data)
         {
-            b.set_last_share_price(d.second.close);
+            b->set_last_share_price(d.second.close);
             // std::cout << "Processing data of " << d.first << std::endl;
-            if (buy_signal(d.second, book_config, b))
+            if (buy_signal(d.second, book_config, *b))
             {
-                buy(b, book_config, d.second.close, d.first);
+                buy(*b, book_config, d.second.close, d.first);
             }
-            else if (sell_signal(d.second, book_config, b))
+            else if (sell_signal(d.second, book_config, *b))
             {
-                double min_price = b.get_min_price();
-                sell(b, book_config, min_price, d.second.close, d.first);
+                double min_price = b->get_min_price();
+                sell(*b, book_config, min_price, d.second.close, d.first);
             }
         }
 
         std::cout << "For config " << book_config << std::endl
-                  << "PNL = " << b.compute_pnl() << ", Trade PNL = " << b.compute_trades_pnl() << ", Book PNL = " << b.compute_book_pnl() << std::endl;
+                  << "PNL = " << b->compute_pnl() << ", Trade PNL = " << b->compute_trades_pnl() << ", Book PNL = " << b->compute_book_pnl() << std::endl;
 
         return b;
+    }
+
+    void dummy_strat_simulator::generate_output(const stock_data_t& sd, const book_config_t& book_config, const book_t& book) 
+    {
+
     }
 
     void  dummy_strat_simulator::generate_output() {
@@ -82,8 +93,9 @@ namespace efl
     bool dummy_strat_simulator::buy_signal(ohlc_t mkt_data, const book_config_t &cfg,
                                            const book_t &b)
     {
-        double close = 0, prev_close = 0;
-        if (close > prev_close) return true;
+        double close = mkt_data.close, prev_close = _last_close;
+        if (prev_close <= 0) return true; // No previous close, we start by buying
+        if (close < prev_close) return true;
         else return false;
         return true;
     }
@@ -91,8 +103,10 @@ namespace efl
     bool dummy_strat_simulator::sell_signal(ohlc_t mkt_data, const book_config_t &cfg,
                                             const book_t &b)
     {
-        double close = 0, prev_close = 0;
-        if (close < prev_close) return true;
+        double close = mkt_data.close, prev_close = _last_close;
+        if (prev_close <= 0) return false; // No previous close
+        if (b.is_empty()) return false; // No equity to sell
+        if (close > prev_close) return true;
         else return false;
         return true;
     }

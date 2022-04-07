@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <vector>
 #include <string>
 
@@ -20,7 +21,8 @@ namespace efl {
     {}
 
     virtual void simulate() = 0;
-    virtual book_t simulate(const stock_data_t& sd, const book_config_t& book_cfg) = 0;
+    virtual std::shared_ptr<book_t> simulate(const stock_data_t& sd, const book_config_t& book_cfg) = 0;
+    virtual void generate_output(const stock_data_t& sd, const book_config_t& book_config, const book_t& book) = 0;
     virtual void generate_output() = 0;
 
     virtual void buy(book_t& b, const book_config_t& cfg, const double price,
