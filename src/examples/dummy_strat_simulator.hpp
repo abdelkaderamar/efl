@@ -1,6 +1,10 @@
 #pragma once
 
+#include <map>
+#include <vector>
+
 #include "efl/abstract_simulator.hpp"
+#include "efl/config_result.hpp"
 
 namespace efl
 {
@@ -23,5 +27,8 @@ namespace efl
         
         bool sell_signal(ohlc_t mkt_data, const book_config_t& cfg,
                              const book_t& b) override;
+
+    protected:
+        std::map<int, std::vector<config_result_t>> _sim_results;
     };
 }

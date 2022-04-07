@@ -36,6 +36,8 @@ namespace efl {
     bool operator < (const config_result_t& other) {
       return _stock < other._stock;
     } 
+
+    std::string header() const;
   };
 
 }

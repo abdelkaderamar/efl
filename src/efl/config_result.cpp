@@ -32,4 +32,13 @@ namespace efl {
     return oss.str();
   }
 
+  std::string config_result_t::header() const {
+    std::ostringstream oss;
+    oss << "Total Amount,Order Amount,Buy Delta,Sell Delta,Empty Book Duration,Total PNL,Total PNL %";
+    for (size_t i = 0; i < _results.size(); i++)
+    {
+      oss << ",Start,End,Account,Pnl,Pnl %,Trade PNL,Book PNL,Max Book Value,Price Evolution %";
+    }
+    return oss.str();
+  }
 }
