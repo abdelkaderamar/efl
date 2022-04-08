@@ -7,10 +7,11 @@
 
 #include <nlohmann/json.hpp>
 
-#include "stock_data.hpp"
 #include "book.hpp"
 #include "book_config.hpp"
+#include "config_result.hpp"
 #include "simulator_config.hpp"
+#include "stock_data.hpp"
 
 namespace efl {
   class abstract_simulator {
@@ -20,10 +21,10 @@ namespace efl {
       _config{config}
     {}
 
-    virtual void simulate() = 0;
-    virtual std::shared_ptr<book_t> simulate(const stock_data_t& sd, const book_config_t& book_cfg) = 0;
+    virtual void simulate();
+    virtual std::shared_ptr<book_t> simulate(const stock_data_t& sd, const book_config_t& book_cfg);
     virtual void generate_output(const stock_data_t& sd, const book_config_t& book_config, const book_t& book) = 0;
-    virtual void generate_output() = 0;
+    virtual void generate_output();
 
     virtual void buy(book_t& b, const book_config_t& cfg, const double price,
                      const date::year_month_day& date);
@@ -40,5 +41,6 @@ namespace efl {
   protected:
     std::map<std::string, std::vector<stock_data_t>> _stock_data;
     simulator_config_t _config;
+    std::map<int, std::vector<config_result_t>> _sim_results;
   };
 }

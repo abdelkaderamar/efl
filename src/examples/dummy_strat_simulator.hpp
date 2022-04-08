@@ -31,7 +31,6 @@ namespace efl
                              const book_t& b) override;
 
     protected:
-        std::map<int, std::vector<config_result_t>> _sim_results;
 
         double _last_close;
     };

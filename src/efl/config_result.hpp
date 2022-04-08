@@ -39,9 +39,9 @@ namespace efl {
 
   struct config_result_t {
 
-    config_result_t(const std::string& stock) : _stock{stock} {}
+    config_result_t(const std::string& stock) : _data_filename{stock} {}
 
-    std::string _stock;
+    std::string _data_filename;
     book_config_t _config;
     period_result_t _result;
 
@@ -50,7 +50,7 @@ namespace efl {
     std::string to_csv();
 
     bool operator < (const config_result_t& other) {
-      return _stock < other._stock;
+      return _data_filename < other._data_filename;
     } 
 
     std::string header() const;
