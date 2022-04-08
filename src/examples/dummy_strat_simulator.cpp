@@ -31,11 +31,11 @@ namespace efl
                         ._price_change = d.price_change(),
                     };
                     result_key_t key {
-                        ._stock = d.get_stock(),
+                        ._stock = d.get_filename(),
                         ._start = d.start_period(),
                         ._end = d.end_period(),
                     };
-                    config_result._results[key] = period_result;
+                    config_result._result = period_result;
                 }
                 _sim_results[index].push_back(config_result);
                 ++index;
@@ -75,7 +75,6 @@ namespace efl
     }
 
     void  dummy_strat_simulator::generate_output() {
-        std::cout << "## " << _sim_results.begin()->second.begin()->_results.size() << std::endl;
         std::ofstream out;
         out.open("results.csv");
         out << _sim_results.begin()->second.begin()->header() << std::endl;

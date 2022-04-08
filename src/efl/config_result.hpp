@@ -43,7 +43,7 @@ namespace efl {
 
     std::string _stock;
     book_config_t _config;
-    std::map<result_key_t, period_result_t> _results;
+    period_result_t _result;
 
     double total_pnl() const;
 
