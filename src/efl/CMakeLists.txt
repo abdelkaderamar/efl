@@ -1,4 +1,5 @@
 add_subdirectory ( util )
+add_subdirectory ( sources )
 
 Add_Library ( strat_sim_lib
   stock_data.cpp

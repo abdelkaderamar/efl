@@ -1,0 +1,9 @@
+add_library ( efl_yahoo
+  yahoo_provider.cpp
+  yahoo_config.cpp
+  yahoo_helper.cpp
+  yahoo_quote.cpp
+)
+
+target_link_libraries( efl_yahoo
+  efl_net )
