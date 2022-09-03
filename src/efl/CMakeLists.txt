@@ -1,3 +1,5 @@
+add_subdirectory ( util )
+
 Add_Library ( strat_sim_lib
   stock_data.cpp
   csv_parser.cpp
@@ -9,4 +11,3 @@ Add_Library ( strat_sim_lib
   file_helper.cpp
   config_result.cpp
   )
-

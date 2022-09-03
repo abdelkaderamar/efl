@@ -16,6 +16,9 @@ endif()
 #  Add_Definitions ( "-DBOOST_LOG_DYN_LINK" )
 #Endif ()
 
+Find_Package (Boost REQUIRED 
+  thread filesystem program_options system date_time)
+
 Include_Directories (${CMAKE_SOURCE_DIR}/src)
 
 add_subdirectory ( src )
