@@ -11,6 +11,8 @@ namespace efl::sources::yahoo
 
         void quote(const std::string &symbol);
 
+        void histo(const std::string &symbol);
+
     private:
         yahoo_config _yahoo_config;
     };

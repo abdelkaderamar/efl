@@ -10,5 +10,7 @@ namespace efl::sources::yahoo
     {
     public:
         static std::string get_quote_path(yahoo_config &config, const std::string &symbol);
+        
+        static std::string get_download_path(yahoo_config &config, const std::string &symbol);
     };
 }

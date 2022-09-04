@@ -41,4 +41,15 @@ namespace efl::sources::yahoo
             std::cout << "Long name = " << q.longName << std::endl;
         }
     }
+
+    void yahoo_provider::histo(const std::string &symbol)
+    {
+        // download/AMC?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true
+
+        std::string url = yahoo_helper::get_download_path(_yahoo_config, symbol) +
+                          "?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true";
+        std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
+
+        std::cout << result << std::endl;
+    }
 }

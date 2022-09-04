@@ -1,73 +1,81 @@
 #include "yahoo_quote.hpp"
 
-
 namespace efl::sources::yahoo
 {
+    template <typename T>
+    void get_if_contain(const nlohmann::json &j, const std::string &key,
+                        T &property)
+    {
+        if (j.contains(key))
+        {
+            j.at(key).get_to(property);
+        }
+    }
     void yahoo_quote_t::from_json(const nlohmann::json &j)
     {
-        j.at("region").get_to(region);
-        j.at("quoteType").get_to(quoteType);
-        j.at("typeDisp").get_to(typeDisp);
-        j.at("quoteSourceName").get_to(quoteSourceName);
-        j.at("customPriceAlertConfidence").get_to(customPriceAlertConfidence);
-        j.at("regularMarketChangePercent").get_to(regularMarketChangePercent);
-        j.at("regularMarketPrice").get_to(regularMarketPrice);
-        j.at("currency").get_to(currency);
-        j.at("exchangeTimezoneName").get_to(exchangeTimezoneName);
-        j.at("exchangeTimezoneShortName").get_to(exchangeTimezoneShortName);
-        j.at("gmtOffSetMilliseconds").get_to(gmtOffSetMilliseconds);
-        j.at("market").get_to(market);
-        j.at("exchange").get_to(exchange);
-        j.at("shortName").get_to(shortName);
-        j.at("longName").get_to(longName);
-        j.at("marketState").get_to(marketState);
-        j.at("firstTradeDateMilliseconds").get_to(firstTradeDateMilliseconds);
-        j.at("regularMarketDayLow").get_to(regularMarketDayLow);
-        j.at("regularMarketVolume").get_to(regularMarketVolume);
-        j.at("regularMarketPreviousClose").get_to(regularMarketPreviousClose);
-        j.at("bid").get_to(bid);
-        j.at("ask").get_to(ask);
-        j.at("bidSize").get_to(bidSize);
-        j.at("askSize").get_to(askSize);
-        j.at("fullExchangeName").get_to(fullExchangeName);
-        j.at("financialCurrency").get_to(financialCurrency);
-        j.at("regularMarketOpen").get_to(regularMarketOpen);
-        j.at("averageDailyVolume3Month").get_to(averageDailyVolume3Month);
-        j.at("averageDailyVolume10Day").get_to(averageDailyVolume10Day);
-        j.at("fiftyTwoWeekLowChange").get_to(fiftyTwoWeekLowChange);
-        j.at("fiftyTwoWeekLowChangePercent").get_to(fiftyTwoWeekLowChangePercent);
-        j.at("fiftyTwoWeekRange").get_to(fiftyTwoWeekRange);
-        j.at("fiftyTwoWeekHighChange").get_to(fiftyTwoWeekHighChange);
-        j.at("fiftyTwoWeekHighChangePercent").get_to(fiftyTwoWeekHighChangePercent);
-        j.at("fiftyTwoWeekLow").get_to(fiftyTwoWeekLow);
-        j.at("fiftyTwoWeekHigh").get_to(fiftyTwoWeekHigh);
-        j.at("earningsTimestamp").get_to(earningsTimestamp);
-        j.at("earningsTimestampStart").get_to(earningsTimestampStart);
-        j.at("earningsTimestampEnd").get_to(earningsTimestampEnd);
-        j.at("trailingAnnualDividendRate").get_to(trailingAnnualDividendRate);
-        j.at("trailingPE").get_to(trailingPE);
-        j.at("trailingAnnualDividendYield").get_to(trailingAnnualDividendYield);
-        j.at("epsTrailingTwelveMonths").get_to(epsTrailingTwelveMonths);
-        j.at("epsForward").get_to(epsForward);
-        j.at("sharesOutstanding").get_to(sharesOutstanding);
-        j.at("bookValue").get_to(bookValue);
-        j.at("fiftyDayAverage").get_to(fiftyDayAverage);
-        j.at("fiftyDayAverageChange").get_to(fiftyDayAverageChange);
-        j.at("fiftyDayAverageChangePercent").get_to(fiftyDayAverageChangePercent);
-        j.at("twoHundredDayAverage").get_to(twoHundredDayAverage);
-        j.at("twoHundredDayAverageChange").get_to(twoHundredDayAverageChange);
-        j.at("twoHundredDayAverageChangePercent").get_to(twoHundredDayAverageChangePercent);
-        j.at("marketCap").get_to(marketCap);
-        j.at("forwardPE").get_to(forwardPE);
-        j.at("priceToBook").get_to(priceToBook);
-        j.at("sourceInterval").get_to(sourceInterval);
-        j.at("exchangeDataDelayedBy").get_to(exchangeDataDelayedBy);
-        j.at("averageAnalystRating").get_to(averageAnalystRating);
-        j.at("priceHint").get_to(priceHint);
-        j.at("regularMarketChange").get_to(regularMarketChange);
-        j.at("regularMarketTime").get_to(regularMarketTime);
-        j.at("regularMarketDayHigh").get_to(regularMarketDayHigh);
-        j.at("regularMarketDayRange").get_to(regularMarketDayRange);
-        j.at("symbol").get_to(symbol);
+        get_if_contain(j, "region", region);
+        get_if_contain(j, "quoteType", quoteType);
+        get_if_contain(j, "typeDisp", typeDisp);
+        get_if_contain(j, "quoteSourceName", quoteSourceName);
+        get_if_contain(j, "customPriceAlertConfidence", customPriceAlertConfidence);
+        get_if_contain(j, "regularMarketChangePercent", regularMarketChangePercent);
+        get_if_contain(j, "regularMarketPrice", regularMarketPrice);
+        get_if_contain(j, "currency", currency);
+        get_if_contain(j, "exchangeTimezoneName", exchangeTimezoneName);
+        get_if_contain(j, "exchangeTimezoneShortName", exchangeTimezoneShortName);
+        get_if_contain(j, "gmtOffSetMilliseconds", gmtOffSetMilliseconds);
+        get_if_contain(j, "market", market);
+        get_if_contain(j, "exchange", exchange);
+        get_if_contain(j, "shortName", shortName);
+        get_if_contain(j, "longName", longName);
+        get_if_contain(j, "marketState", marketState);
+        get_if_contain(j, "firstTradeDateMilliseconds", firstTradeDateMilliseconds);
+        get_if_contain(j, "regularMarketDayLow", regularMarketDayLow);
+        get_if_contain(j, "regularMarketVolume", regularMarketVolume);
+        get_if_contain(j, "regularMarketPreviousClose", regularMarketPreviousClose);
+        get_if_contain(j, "bid", bid);
+        get_if_contain(j, "ask", ask);
+        get_if_contain(j, "bidSize", bidSize);
+        get_if_contain(j, "askSize", askSize);
+        get_if_contain(j, "fullExchangeName", fullExchangeName);
+        get_if_contain(j, "financialCurrency", financialCurrency);
+        get_if_contain(j, "regularMarketOpen", regularMarketOpen);
+        get_if_contain(j, "averageDailyVolume3Month", averageDailyVolume3Month);
+        get_if_contain(j, "averageDailyVolume10Day", averageDailyVolume10Day);
+        get_if_contain(j, "fiftyTwoWeekLowChange", fiftyTwoWeekLowChange);
+        get_if_contain(j, "fiftyTwoWeekLowChangePercent", fiftyTwoWeekLowChangePercent);
+        get_if_contain(j, "fiftyTwoWeekRange", fiftyTwoWeekRange);
+        get_if_contain(j, "fiftyTwoWeekHighChange", fiftyTwoWeekHighChange);
+        get_if_contain(j, "fiftyTwoWeekHighChangePercent", fiftyTwoWeekHighChangePercent);
+        get_if_contain(j, "fiftyTwoWeekLow", fiftyTwoWeekLow);
+        get_if_contain(j, "fiftyTwoWeekHigh", fiftyTwoWeekHigh);
+        get_if_contain(j, "earningsTimestamp", earningsTimestamp);
+        get_if_contain(j, "earningsTimestampStart", earningsTimestampStart);
+        get_if_contain(j, "earningsTimestampEnd", earningsTimestampEnd);
+        get_if_contain(j, "trailingAnnualDividendRate", trailingAnnualDividendRate);
+        get_if_contain(j, "trailingPE", trailingPE);
+        get_if_contain(j, "trailingAnnualDividendYield", trailingAnnualDividendYield);
+        get_if_contain(j, "epsTrailingTwelveMonths", epsTrailingTwelveMonths);
+        get_if_contain(j, "epsForward", epsForward);
+        get_if_contain(j, "sharesOutstanding", sharesOutstanding);
+        get_if_contain(j, "bookValue", bookValue);
+        get_if_contain(j, "fiftyDayAverage", fiftyDayAverage);
+        get_if_contain(j, "fiftyDayAverageChange", fiftyDayAverageChange);
+        get_if_contain(j, "fiftyDayAverageChangePercent", fiftyDayAverageChangePercent);
+        get_if_contain(j, "twoHundredDayAverage", twoHundredDayAverage);
+        get_if_contain(j, "twoHundredDayAverageChange", twoHundredDayAverageChange);
+        get_if_contain(j, "twoHundredDayAverageChangePercent", twoHundredDayAverageChangePercent);
+        get_if_contain(j, "marketCap", marketCap);
+        get_if_contain(j, "forwardPE", forwardPE);
+        get_if_contain(j, "priceToBook", priceToBook);
+        get_if_contain(j, "sourceInterval", sourceInterval);
+        get_if_contain(j, "exchangeDataDelayedBy", exchangeDataDelayedBy);
+        get_if_contain(j, "averageAnalystRating", averageAnalystRating);
+        get_if_contain(j, "priceHint", priceHint);
+        get_if_contain(j, "regularMarketChange", regularMarketChange);
+        get_if_contain(j, "regularMarketTime", regularMarketTime);
+        get_if_contain(j, "regularMarketDayHigh", regularMarketDayHigh);
+        get_if_contain(j, "regularMarketDayRange", regularMarketDayRange);
+        get_if_contain(j, "symbol", symbol);
     }
 }
