@@ -25,7 +25,7 @@ namespace efl {
 
     static void clean_token(std::string& str, bool is_numeric = false);
 
-    date::year_month_day parse_date(const std::string& str);
+    static date::year_month_day parse_date(const std::string& str);
     double parse_volume(const std::string& str);
     double parse_variation(const std::string& str);
   private:

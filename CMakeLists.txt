@@ -19,6 +19,19 @@ endif()
 Find_Package (Boost REQUIRED 
   thread filesystem program_options system date_time)
 
+include(FetchContent)
+
+FetchContent_Declare(ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  GIT_TAG v3.0.0
+)
+
+FetchContent_GetProperties(ftxui)
+if(NOT ftxui_POPULATED)
+  FetchContent_Populate(ftxui)
+  add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 Include_Directories (${CMAKE_SOURCE_DIR}/src)
 
 add_subdirectory ( src )

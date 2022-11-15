@@ -8,8 +8,14 @@ int main(int argc, char *argv[])
 {
     yahoo_provider provider;
 
-    provider.quote("SGO.PA,AAPL,T,AMC,META");
+    auto quotes = provider.quote("SGO.PA,AAPL,T,AMC,META");
+    for (auto& quote: quotes) {
+        std::cout << "Symbol: \t" << quote.symbol << "\t LastPx:" << quote.regularMarketPrice << std::endl;
+    }
 
-    provider.histo("AMC");
+    auto histo_data = provider.histo("AMC");
+    for (auto& kvp : histo_data._data) {
+        std::cout << kvp.first << ": " << kvp.second << std::endl;
+    }
     return 0;
 }
