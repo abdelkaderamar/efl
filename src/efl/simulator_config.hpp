@@ -27,6 +27,8 @@ namespace efl {
     interval_t empty_book_duration;
     double fees;
     double tax;
+
+    std::string filename;
   };
 
 

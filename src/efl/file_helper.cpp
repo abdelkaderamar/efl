@@ -1,6 +1,9 @@
 #include "file_helper.hpp"
 
 #include <iostream>
+#include <filesystem>
+#include "simulator_config.hpp"
+#include "stock_data.hpp"
 
 namespace fs = std::filesystem;
 
@@ -28,4 +31,13 @@ namespace efl {
     }
   }
 
+  std::string file_helper::get_result_filename(const simulator_config_t &sim_config,
+                                               const std::string& stock)
+  {
+    std::filesystem::path p1{sim_config.filename};
+    std::filesystem::path p2{stock};
+    std::string s = p1.stem().string() + "-" + p2.filename().stem().string() + ".csv";
+    std::cout << "## " << stock << " => " << s << std::endl;
+    return s;
+  }
 }

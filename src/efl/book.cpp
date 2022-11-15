@@ -128,8 +128,8 @@ namespace efl {
 
   double book_t::compute_book_value() const {
     double value = 0;
-    value = std::accumulate(_rows.begin(), _rows.end(), 0.0,
-                            [this](double sum, const book_row_t& row) { return sum + (_last_share_price*row.qty); });
+    auto add = [&]<typename T>(T sum, const book_row_t& row) { return sum + (_last_share_price*row.qty); };
+    value = std::accumulate(_rows.begin(), _rows.end(), 0.0, add);
     return value;
 
   }

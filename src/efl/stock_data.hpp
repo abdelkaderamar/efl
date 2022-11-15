@@ -18,13 +18,13 @@ namespace efl {
 
   class stock_data_t {
   public:
-    stock_data_t(const std::string& stock_name,
+    stock_data_t(const std::string& filename,
                std::map<date::year_month_day, ohlc_t> data) :
-      _stock{stock_name},
+      _filename{filename},
       _data{data}
     {}
 
-    const std::string& get_stock() const { return _stock; }
+    const std::string& get_filename() const { return _filename; }
 
     const bool is_valid() const { return _data.size() > 0; }
 
@@ -43,7 +43,7 @@ namespace efl {
     void add_ohlc(const ohlc_t& data);
 
   private:
-    std::string _stock;
+    std::string _filename;
     std::map<date::year_month_day, ohlc_t> _data;
   };
 
