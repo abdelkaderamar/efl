@@ -15,7 +15,8 @@ namespace efl::sources::yahoo
 
         std::vector<yahoo_quote_t> quote(const std::string &symbol);
 
-        yahoo_histo_data_t histo(const std::string &symbol);
+        yahoo_histo_data_t histo(const std::string &symbol, const date::year_month_day &start,
+                                 const date::year_month_day &end);
 
     private:
         yahoo_config _yahoo_config;

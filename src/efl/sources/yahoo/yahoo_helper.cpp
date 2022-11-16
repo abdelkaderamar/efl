@@ -1,5 +1,6 @@
 #include "yahoo_helper.hpp"
 
+#include <ctime>
 #include <regex>
 
 namespace efl::sources::yahoo
@@ -58,4 +59,20 @@ namespace efl::sources::yahoo
         return ohlcv;
     }
 
+    time_t yahoo_helper::get_epoch(const date::year_month_day& d) 
+    {
+        struct tm t = {.tm_mday = (int)(static_cast<unsigned>(d.day())),
+                        .tm_mon = (int)(static_cast<unsigned>(d.month()) - 1),
+                        .tm_year = int(d.year()) - 1900};
+        // return std::mktime(&t);
+        return timegm(&t);
+    }
+
+    std::string yahoo_helper::get_histo_request(const std::string &symbol, const date::year_month_day &start,
+                                           const date::year_month_day &end) 
+    {
+        return "?period1=" + std::to_string(get_epoch(start)) + 
+               "&period2=" + std::to_string(get_epoch(end)) + 
+               "&interval=1d&events=history&includeAdjustedClose=true";
+    }
 }

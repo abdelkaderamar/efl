@@ -12,8 +12,10 @@ int main(int argc, char *argv[])
     for (auto& quote: quotes) {
         std::cout << "Symbol: \t" << quote.symbol << "\t LastPx:" << quote.regularMarketPrice << std::endl;
     }
-
-    auto histo_data = provider.histo("AMC");
+    
+    date::year_month_day start{date::year(2022), date::month(1), date::day(1)};
+    date::year_month_day end{date::year(2022), date::month(11), date::day(1)};
+    auto histo_data = provider.histo("AMC", start, end);
     for (auto& kvp : histo_data._data) {
         std::cout << kvp.first << ": " << kvp.second << std::endl;
     }

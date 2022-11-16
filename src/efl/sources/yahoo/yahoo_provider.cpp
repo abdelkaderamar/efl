@@ -56,35 +56,25 @@ namespace efl::sources::yahoo
 7    Date	Open	High	Low	Close	Adj Close	Volume
     
     */
-    yahoo_histo_data_t yahoo_provider::histo(const std::string &symbol)
+    yahoo_histo_data_t yahoo_provider::histo(const std::string &symbol,
+        const date::year_month_day& start,
+        const date::year_month_day& end
+        )
     {
         // download/AMC?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true
+        // period1=1387324800
+        // period2=1652140800
+        // interval=1d
+        // events=history
+
+        std::string request_url = yahoo_helper::get_histo_request(symbol, start, end);
+
         yahoo_histo_data_t histo_data{symbol};
 
-        std::string url = yahoo_helper::get_download_path(_yahoo_config, symbol) +
-                          "?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true";
+        std::string url = yahoo_helper::get_download_path(_yahoo_config, symbol) + request_url;
+                          // "?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true";
         std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
         
-        // std::ofstream data_file{"histo_data.csv"};
-        // data_file << result;
-        // data_file.close();
-
-        // io::CSVReader<7,
-        //           io::trim_chars<' ', '\t'> ,
-        //           io::double_quote_escape<',', '"'>
-        //           > csv_reader{"histo_data.csv"};
-        // // skip the header
-        // csv_reader.read_header(io::ignore_no_column,
-        //                    "Date","Open","High","Low","Close","Adj Close", "Volume");
-        // std::string date_str, open_str, high_str, low_str, close_str, adj_close_str, volume_str;
-        // while (csv_reader.read_row(date_str, open_str, high_str, low_str, close_str, adj_close_str, volume_str)) {
-        //     yahoo_ohlcv_t ohlcv;
-        //     std::cout << date_str << std::endl;
-        //     ohlcv._date = yahoo_helper::parse_date(date_str);
-        //     ohlcv._open = std::stod(open_str);
-        //     ohlcv._close = std::stod(close_str);
-        //     std::cout << ohlcv._date << ": \t" << ohlcv._open << std::endl;
-        // }
         std::stringstream ss;
         ss << result;
         std::string line;
