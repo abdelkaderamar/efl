@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.7)
 
-project (efl VERSION 0.0.1)
+project ( efl 
+  VERSION 0.0.1
+  LANGUAGES CXX )
+
+If (PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+  Message(
+    FATAL_ERROR
+      "In-source builds not allowed [${PROJECT_SOURCE_DIR}] vs [${PROJECT_BINARY_DIR}]. Please make a new directory (called a build directory) and run CMake from there."
+  )
+Endif()
 
 set ( CMAKE_CXX_STANDARD 20 )
 set ( CMAKE_CXX_STANDARD_REQUIRED ON )
@@ -17,7 +26,9 @@ endif()
 #Endif ()
 
 Find_Package (Boost REQUIRED 
-  thread filesystem program_options system date_time)
+   system)
+
+#include(cmake/CPM.cmake)
 
 include(FetchContent)
 
