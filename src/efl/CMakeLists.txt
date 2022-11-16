@@ -12,3 +12,5 @@ Add_Library ( strat_sim_lib
   file_helper.cpp
   config_result.cpp
   )
+
+target_link_libraries( strat_sim_lib nlohmann_json::nlohmann_json )

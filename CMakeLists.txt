@@ -28,8 +28,15 @@ endif()
 Find_Package (Boost REQUIRED 
    system)
 
-#include(cmake/CPM.cmake)
+include(cmake/CPM.cmake)
 
+
+CPMAddPackage(
+  NAME json
+  GITHUB_REPOSITORY nlohmann/json
+  VERSION 3.11.2
+  OPTIONS "JSON_FMT_EXTERNAL 1"
+)
 include(FetchContent)
 
 FetchContent_Declare(ftxui
