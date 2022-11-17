@@ -150,7 +150,7 @@ namespace efl::util::net
         }
         else
         {
-            spdlog::error("Error: {}", err.to_string());
+            spdlog::error("Error: {}", err.value());
         }
     }
 
@@ -178,7 +178,7 @@ namespace efl::util::net
         }
         else
         {
-            spdlog::error("Error: {}", err.to_string());
+            spdlog::error("Error: {}", err.value());
         }
     }
 
@@ -194,7 +194,7 @@ namespace efl::util::net
         }
         else if (err != boost::asio::error::eof)
         {
-            spdlog::error("Error: {}", err.to_string());
+            spdlog::error("Error: {}", err.value());
         }
     }
 
