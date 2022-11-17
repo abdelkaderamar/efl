@@ -35,8 +35,26 @@ CPMAddPackage(
   NAME json
   GITHUB_REPOSITORY nlohmann/json
   VERSION 3.11.2
-  OPTIONS "JSON_FMT_EXTERNAL 1"
+  OPTIONS "JSON_INSTALL 1"
 )
+
+CPMAddPackage("gh:fmtlib/fmt#9.1.0")
+CPMAddPackage("gh:gabime/spdlog@1.11.0")
+
+# CPMAddPackage(
+#   NAME fmt
+#   GIT_TAG 9.1.0
+#   GITHUB_REPOSITORY fmtlib/fmt
+#   OPTIONS "FMT_INSTALL YES" # create an installable target
+# )
+
+# CPMAddPackage(
+#   NAME spdlog
+#   GITHUB_REPOSITORY gabime/spdlog
+#   VERSION 1.11.0
+#   OPTIONS "SPDLOG_FMT_EXTERNAL 1"
+# )
+
 include(FetchContent)
 
 FetchContent_Declare(ftxui

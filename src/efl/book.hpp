@@ -114,3 +114,4 @@ namespace efl {
     double _trade_pnl, _book_pnl, _pnl;
   };
 }
+

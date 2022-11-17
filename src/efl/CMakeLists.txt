@@ -14,3 +14,5 @@ Add_Library ( strat_sim_lib
   )
 
 target_link_libraries( strat_sim_lib nlohmann_json::nlohmann_json )
+target_link_libraries( strat_sim_lib spdlog )
+target_link_libraries( strat_sim_lib fmt::fmt )
