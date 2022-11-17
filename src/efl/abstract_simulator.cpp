@@ -4,20 +4,23 @@
 #include <fstream>
 #include <iostream>
 
+#include <spdlog/spdlog.h>
+
 #include "efl/file_helper.hpp"
+#include "efl/util/fmt_util.hpp"
 
 namespace efl {
 
   void abstract_simulator::simulate() {
-    std::cout << "## " << _stock_data.size() << " shares to simulate" << std::endl;
+    spdlog::info("## {} shares to simulate", _stock_data.size());
 
     std::vector<book_config_t> book_configs = generate_book_config(_config);
-    std::cout << "## " << book_configs.size() << " book config generated" << std::endl;
+    spdlog::info("## {} book config generated", book_configs.size());
 
 
     int index = 1;
     for (const auto& e : _stock_data) {
-      std::cout << "## For share " << e.first << " we have " << e.second.size() << " data files" << std::endl;
+      spdlog::info("## For share {} we have {} data files", e.first, e.second.size());
       for (const auto &d : e.second)
       {
         for (const auto &book_cfg : book_configs)
@@ -51,7 +54,7 @@ namespace efl {
     for (auto &d : data)
     {
       b->set_last_share_price(d.second.close);
-      // std::cout << "Processing data of " << d.first << std::endl;
+      spdlog::debug("Processing data of {}", d.first);
       if (buy_signal(d.second, book_cfg, *b))
       {
         buy(*b, book_cfg, d.second.close, d.first);
@@ -63,9 +66,9 @@ namespace efl {
       }
     }
 
-    std::cout << "For config " << book_cfg << std::endl
-              << "PNL = " << b->compute_pnl() << ", Trade PNL = " << b->compute_trades_pnl() << ", Book PNL = " << b->compute_book_pnl() << std::endl;
-
+    spdlog::info("For config {}", book_cfg.to_string());
+    spdlog::info("PNL = {}, Trade PNL = {}, Book PNL = {}",
+                 b->compute_pnl(), b->compute_trades_pnl(), b->compute_book_pnl());
     return b;
   }
 
@@ -78,7 +81,6 @@ namespace efl {
       for (auto &cr : r.second)
       {
         out << cr.to_csv() << std::endl;
-        // std::cout << "## " << cr._config.to_csv() << std::endl;
       }
       out.close();
     }

@@ -2,7 +2,11 @@
 
 #include <iostream>
 
+#include <spdlog/spdlog.h>
+
 #include "https_client.hpp"
+
+
 
 namespace efl::util::net
 {
@@ -24,12 +28,12 @@ namespace efl::util::net
         }
         catch (std::exception &e)
         {
-            std::cerr << "Exception " << e.what() << std::endl;
+            spdlog::error("Exception {}", e.what());
             return "";
         }
         catch (...)
         {
-            std::cerr << "Exception" << std::endl;
+            spdlog::error("Exception");
             return "";
         }
     }

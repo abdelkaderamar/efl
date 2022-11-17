@@ -1,10 +1,23 @@
 #include "yahoo_histo_data.hpp"
 
 #include <iomanip>
+#include <sstream>
 
 namespace efl::sources::yahoo
 {
-    std::ostream& operator<<(std::ostream& os, const yahoo_ohlcv_t& ohlcv) {
+    std::string yahoo_ohlcv_t::to_string() const
+    {
+        std::stringstream ss;
+        ss << "Open:" << std::left << std::setw(10) << _open << "\t"
+           << "Low:" << std::left << std::setw(10) << _low << "\t"
+           << "High:" << std::left << std::setw(10) << _high << "\t"
+           << "Close:" << std::left << std::setw(10) << _close << "\t"
+           << "Adj Close:" << std::left << std::setw(10) << _adj_close << "\t"
+           << "Volume:" << std::left << std::setw(10) << _volume;
+        return ss.str();
+    }
+    std::ostream &operator<<(std::ostream &os, const yahoo_ohlcv_t &ohlcv)
+    {
         os << "Open:" << std::left << std::setw(10) << ohlcv._open << "\t"
            << "Low:" << std::left << std::setw(10) << ohlcv._low << "\t"
            << "High:" << std::left << std::setw(10) << ohlcv._high << "\t"
@@ -13,5 +26,4 @@ namespace efl::sources::yahoo
            << "Volume:" << std::left << std::setw(10) << ohlcv._volume;
         return os;
     }
-
 }

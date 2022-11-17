@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 
 #include "efl/csv.h"
 #include "efl/util/net/https_client_helper.hpp"
@@ -26,24 +27,24 @@ namespace efl::sources::yahoo
         std::string url = yahoo_helper::get_quote_path(_yahoo_config, symbol);
         std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
 
-        std::cout << result << std::endl;
+        spdlog::info("{}", result);
 
         auto j = json::parse(result);
 
         auto qr = j["quoteResponse"];
 
         auto r = qr["result"];
-
+        
         for (json::size_type i = 0; i < r.size(); ++i)
         {
-            std::cout << "***************************************" << std::endl;
-            std::cout << std::setw(4) << r.at(i) << std::endl;
+            spdlog::info("***************************************");
+            spdlog::info("{}", r.at(i));
 
             yahoo_quote_t q;
             q.from_json(r.at(i));
             quotes.push_back(q);
 
-            std::cout << "Long name = " << q.longName << std::endl;
+            spdlog::info("Long name = {}", q.longName);
         }
 
         return quotes;
@@ -80,7 +81,6 @@ namespace efl::sources::yahoo
         std::string line;
         std::getline(ss, line, '\n'); // header
         while (std::getline(ss, line, '\n')) {
-            // std::cout << line << std::endl;
             auto ohlcv = yahoo_helper::parse_histo_data(line);
             histo_data._data[ohlcv._date] = ohlcv;
         }

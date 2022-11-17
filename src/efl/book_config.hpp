@@ -15,6 +15,8 @@ namespace efl {
     int empty_book_duration;
 
     std::string to_csv() const;
+
+    std::string to_string() const;
   };
 
   std::ostream& operator<<(std::ostream& os, const book_config_t& cfg);

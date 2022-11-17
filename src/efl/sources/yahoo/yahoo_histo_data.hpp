@@ -15,6 +15,8 @@ namespace efl::sources::yahoo
         double _close;
         double _adj_close;
         double _volume;
+
+        std::string to_string() const;
     };
 
     struct yahoo_histo_data_t {

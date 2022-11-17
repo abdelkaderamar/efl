@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <filesystem>
+
+#include <spdlog/spdlog.h>
+
 #include "simulator_config.hpp"
 #include "stock_data.hpp"
 
@@ -14,7 +17,7 @@ namespace efl {
   {
     for (const fs::directory_entry& de : fs::directory_iterator(p)) {
       if (fs::exists(de) && fs::is_directory(de)) {
-        std::cout << "# " << de.path().filename() << std::endl;
+        spdlog::info("# {}", de.path().filename().c_str());
         std::string name = de.path().filename();
         std::set<std::string> files;
         for (const fs::directory_entry& e : fs::directory_iterator(de)) {
@@ -37,7 +40,7 @@ namespace efl {
     std::filesystem::path p1{sim_config.filename};
     std::filesystem::path p2{stock};
     std::string s = p1.stem().string() + "-" + p2.filename().stem().string() + ".csv";
-    std::cout << "## " << stock << " => " << s << std::endl;
+    spdlog::info("## {} => {}", stock, s);
     return s;
   }
 }

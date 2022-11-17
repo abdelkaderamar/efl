@@ -23,11 +23,8 @@ namespace efl::sources::yahoo
         {
             if (m.size() == 4)
             {
-                //      std::cout << m[1] << std::endl;
                 auto day = date::day{(unsigned)std::stoi(m[3])};
-                //      std::cout << m[2] << std::endl;
                 auto month = date::month{(unsigned)std::stoi(m[2])};
-                //      std::cout << m[3] << std::endl;
                 auto year = date::year{std::stoi(m[1])};
 
                 return date::year_month_day{year, month, day};

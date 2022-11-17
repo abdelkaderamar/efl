@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <nlohmann/json.hpp>
+#include <spdlog/spdlog.h>
 
 #include "efl/sources/yahoo/yahoo_provider.hpp"
 
@@ -16,14 +17,14 @@ int main(int argc, char *argv[])
     yahoo_provider provider;
 
     for (auto& ind : data) { // loop through indices
-        std::cout << "[## " << ind << " ##]" << std::endl;
+        spdlog::info("[## {} ##]", ind);
         auto stocks = ind["stocks"];
         for (auto& s : stocks) {
             std::string ticker = s["ticker"].get<std::string>();
-            std::cout << ticker << std::endl;
+            spdlog::info("{}", ticker);
             auto quotes = provider.quote(ticker);
             for (auto& q : quotes) {
-                std::cout << ticker << ": " << q.longName << std::endl;
+                spdlog::info("{}: {}", ticker, q.longName);
             }
         }
     }

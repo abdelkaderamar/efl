@@ -5,6 +5,9 @@
 
 #include "csv.h"
 #include "date.h"
+#include <spdlog/spdlog.h>
+
+#include "efl/util/fmt_util.hpp"
 
 namespace efl {
 
@@ -18,10 +21,9 @@ namespace efl {
       while ((pos = line.find(_separator, pos)) != std::string::npos) {
         std::string token = line.substr(prev, pos-prev);
         //clean_token(token);
-        std::cout << "[" << token << "]";
+        spdlog::debug("[{}]", token);
         prev = ++pos;
       }
-      std::cout << std::endl;
     }
   }
 
@@ -49,15 +51,14 @@ namespace efl {
       clean_token(low_str, true);
       clean_token(volume_str, true);
       clean_token(variation_str, true);
-      std::cout << "[" << date_str << "][" << last_str << "][" <<  open_str
-                << "][" << high_str << "][" <<  low_str << "][" << volume_str
-                << "][" << variation_str << "]" << std::endl;
+      spdlog::info("[{}][{}][{}][{}][{}][{}][{}]", 
+              date_str, last_str, open_str, high_str, low_str, volume_str, variation_str);
       auto date = parse_date(date_str);
       if (date.ok()) {
-        std::cout << date << " correctly parsed" << std::endl;
+        spdlog::info("{} correctly parsed", date);
       }
       else {
-        std::cout << date_str << " is not a valid date" << std::endl;
+        spdlog::warn("{} is not a valid date", date_str);
       }
       double close = std::stod(last_str);
       double open = std::stod(open_str);
@@ -65,9 +66,8 @@ namespace efl {
       double low = std::stod(low_str);
       double volume = parse_volume(volume_str);
       double variation = parse_variation(variation_str);
-      std::cout << "Close = " << close << ", Open = " << open <<
-        ", High = " << high << ", Low = " << low <<
-        ", Volume = " << volume << ", Variation = " << variation << std::endl;
+      spdlog::info("Close = {}, Open = {}, High = {}, Low = {}, Volume = {}, Variation = {}",
+        close, open, high, low, volume, variation);
 
       ohlc_t day_data
         {
@@ -87,7 +87,6 @@ namespace efl {
 
   void csv_parser::clean_token(std::string& str, const bool is_numeric/* = false*/) {
     if (str.size() == 0) return;
-    //std::cout << str[0] << std::endl;
     if (str[0] == '"') str = str.substr(1);
     if (str[str.size()-1] == '"') str = str.substr(0, str.size()-1);
 
@@ -102,11 +101,8 @@ namespace efl {
     std::smatch m;
     if (std::regex_match(str, m, re)) {
       if (m.size() == 4) {
-        //      std::cout << m[1] << std::endl;
         auto day = date::day{(unsigned)std::stoi(m[1])};
-        //      std::cout << m[2] << std::endl;
         auto month = date::month{(unsigned)std::stoi(m[2])};
-        //      std::cout << m[3] << std::endl;
         auto year = date::year{std::stoi(m[3])};
 
         return date::year_month_day{year, month, day};

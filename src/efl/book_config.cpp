@@ -10,6 +10,16 @@ namespace efl {
     return oss.str();
   }
 
+  std::string book_config_t::to_string() const {
+    std::stringstream ss;
+    ss << "Total Amount = " << total_amount
+       << ", Order Amount = " << order_amount
+       << ", Buy Delta = " << delta_buy
+       << ", Sell Delta = " << delta_sell
+       << ", Empty book duration = " << empty_book_duration;
+    return ss.str();
+  }
+
   std::ostream& operator<<(std::ostream& os, const efl::book_config_t& cfg)
   {
     os << "Total Amount = " << cfg.total_amount

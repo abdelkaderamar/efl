@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <spdlog/spdlog.h>
+
 namespace efl::util::net
 {
     https_client::https_client(boost::asio::io_service &io_service,
@@ -31,7 +33,7 @@ namespace efl::util::net
     {
         if (!err)
         {
-            std::cout << "Resolve OK" << std::endl;
+            spdlog::info("Resolve OK");
             _socket.set_verify_mode(boost::asio::ssl::verify_peer);
             _socket.set_verify_callback(
                 boost::bind(&https_client::verify_certificate, this, _1, _2));
@@ -42,7 +44,7 @@ namespace efl::util::net
         }
         else
         {
-            std::cout << "Error resolve: " << err.message() << std::endl;
+            spdlog::error("Error resolve: {}", err.message());
         }
     }
 
@@ -60,7 +62,7 @@ namespace efl::util::net
         char subject_name[256];
         X509 *cert = X509_STORE_CTX_get_current_cert(ctx.native_handle());
         X509_NAME_oneline(X509_get_subject_name(cert), subject_name, 256);
-        std::cout << "Verifying " << subject_name << std::endl;
+        spdlog::info("Verifying {}", subject_name);
 
         return preverified;
     }
@@ -69,14 +71,14 @@ namespace efl::util::net
     {
         if (!err)
         {
-            std::cout << "Connect OK " << std::endl;
+            spdlog::info("Connect OK");
             _socket.async_handshake(boost::asio::ssl::stream_base::client,
                                     boost::bind(&https_client::handle_handshake, this,
                                                 boost::asio::placeholders::error));
         }
         else
         {
-            std::cerr << "Connect failed: " << err.message() << std::endl;
+            spdlog::error("Connect failed: {}", err.message());
         }
     }
 
@@ -84,10 +86,10 @@ namespace efl::util::net
     {
         if (!error)
         {
-            std::cout << "Handshake OK " << std::endl;
-            std::cout << "Request: " << std::endl;
+            spdlog::info("Handshake OK ");
+            spdlog::info("Request: ");
             const char *header = boost::asio::buffer_cast<const char *>(_request.data());
-            std::cout << header << std::endl;
+            spdlog::info("{}", header);
 
             // The handshake was successful. Send the request.
             boost::asio::async_write(_socket, _request,
@@ -96,7 +98,7 @@ namespace efl::util::net
         }
         else
         {
-            std::cerr << "Handshake failed: " << error.message() << std::endl;
+            spdlog::error("Handshake failed: ", error.message());
         }
     }
 
@@ -113,7 +115,7 @@ namespace efl::util::net
         }
         else
         {
-            std::cerr << "Error write req: " << err.message() << std::endl;
+            spdlog::error("Error write req: {}", err.message());
         }
     }
 
@@ -131,16 +133,15 @@ namespace efl::util::net
             std::getline(response_stream, status_message);
             if (!response_stream || http_version.substr(0, 5) != "HTTP/")
             {
-                std::cout << "Invalid response\n";
+                spdlog::error("Invalid response");
                 return;
             }
             if (status_code != 200)
             {
-                std::cout << "Response returned with status code ";
-                std::cout << status_code << "\n";
+                spdlog::error("Response returned with status code: {}", status_code);
                 return;
             }
-            std::cout << "Status code: " << status_code << "\n";
+            spdlog::info("Status code: {}", status_code);
 
             // Read the response headers, which are terminated by a blank line.
             boost::asio::async_read_until(_socket, _response, "\r\n\r\n",
@@ -149,7 +150,7 @@ namespace efl::util::net
         }
         else
         {
-            std::cerr << "Error: " << err.message() << std::endl;
+            spdlog::error("Error: {}", err.to_string());
         }
     }
 
@@ -160,8 +161,9 @@ namespace efl::util::net
             // Process the response headers.
             std::istream response_stream(&_response);
             std::string header;
-            while (std::getline(response_stream, header) && header != "\r")
+            while (std::getline(response_stream, header) && header != "\r") {
                 std::cout << header << "\n";
+            }
             std::cout << "\n";
 
             // Write whatever content we already have to output.
@@ -176,7 +178,7 @@ namespace efl::util::net
         }
         else
         {
-            std::cerr << "Error: " << err << std::endl;
+            spdlog::error("Error: {}", err.to_string());
         }
     }
 
@@ -192,7 +194,7 @@ namespace efl::util::net
         }
         else if (err != boost::asio::error::eof)
         {
-            std::cerr << "Error: " << err << std::endl;
+            spdlog::error("Error: {}", err.to_string());
         }
     }
 
