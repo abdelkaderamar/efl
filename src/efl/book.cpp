@@ -33,13 +33,8 @@ namespace efl {
   void book_t::add_order(const double& price, const int qty, const date::year_month_day& date) {
     double order_notional = qty * price;
     if (order_notional > _current_notional) {
-      // std::cerr << "Remaining amount = " << _current_notional <<
-      //   ". Can't buy " << qty << " shares @ " << price << " | " << date << std::endl;
-      spdlog::warn ("Remaining amount = {}. Can't buy {} shares @ {} | {}/{}/{}", 
-      _current_notional, qty, price, price, 
-        (int)(date.year()), 
-        static_cast<unsigned>(date.month()), 
-        static_cast<unsigned>(date.day()));
+      spdlog::warn("Remaining amount = {}. Can't buy {} shares @ {} | {}",
+                   _current_notional, qty, price, date);
       return;
     }
     _rows.insert(book_row_t{
@@ -59,8 +54,6 @@ namespace efl {
     }
     spdlog::info("Buy {} shares @ {} | {} | Remaining = {} | {}",
                  qty, price, date, _current_notional, rows_str);
-    // std::copy(_rows.begin(), _rows.end(), std::ostream_iterator<book_row_t>(std::cout, " "));
-    // std::cout << std::endl;
   }
 
   void book_t::sell_order(const double& price, const double& sell_price, const date::year_month_day& date) {
@@ -87,11 +80,6 @@ namespace efl {
       }
       spdlog::info("Sell {} shares @ {} | {} | Remaining = | {}",
                    it->qty, sell_price, date, _current_notional, rows_str);
-
-      // std::cout << "Sell " << it->qty << " shares @ " << sell_price << " | " << date << " | Remaining = " << _current_notional;
-      // std::copy(_rows.begin(), _rows.end(), std::ostream_iterator<book_row_t>(std::cout, " "));
-      // std::cout << std::endl;
-
     }
   }
 
