@@ -27,8 +27,8 @@ jobs:
       uses: actions/cache@v3
       id: cache-boost
       with:
-        path: "~/boost"
-        key: libboost-system1.74-dev
+        path: "~/runner_cache"
+        key: ${{ runner.os }}-BOOST-SYSTEM
     - name: Install boost
       env:
         CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
