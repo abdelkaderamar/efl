@@ -37,3 +37,8 @@ Target_link_libraries ( investing_ticker_yahoo_checker
    efl_yahoo strat_sim_lib
    #efl_persistence 
    pthread)
+
+File ( COPY 
+   ${CMAKE_CURRENT_SOURCE_DIR}/investing-indices.json
+   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+)
