@@ -7,202 +7,202 @@
             "WFD Unibail Rodamco NV (URW)": {
                 "name": "WFD Unibail Rodamco NV (URW)",
                 "url": "https://fr.investing.com/equities/uniball",
-                "ticker": "URW"
+                "ticker": "URW.AS"
             },
             "Worldline SA (WLN)": {
                 "name": "Worldline SA (WLN)",
                 "url": "https://fr.investing.com/equities/worldline-sa",
-                "ticker": "WLN"
+                "ticker": "WLN.PA"
             },
             "Vivendi SA (VIV)": {
                 "name": "Vivendi SA (VIV)",
                 "url": "https://fr.investing.com/equities/vivendi",
-                "ticker": "VIV"
+                "ticker": "VIV.PA"
             },
             "Vinci SA (SGEF)": {
                 "name": "Vinci SA (SGEF)",
                 "url": "https://fr.investing.com/equities/vinci",
-                "ticker": "SGEF"
+                "ticker": "DG.PA"
             },
             "TotalEnergies SE (TTEF)": {
                 "name": "TotalEnergies SE (TTEF)",
                 "url": "https://fr.investing.com/equities/total",
-                "ticker": "TTEF"
+                "ticker": "TTE.PA"
             },
             "Thales (TCFP)": {
                 "name": "Thales (TCFP)",
                 "url": "https://fr.investing.com/equities/thales",
-                "ticker": "TCFP"
+                "ticker": "HO.PA"
             },
             "STMicroelectronics NV (STM)": {
                 "name": "STMicroelectronics NV (STM)",
                 "url": "https://fr.investing.com/equities/stmicroelectroni",
-                "ticker": "STM"
+                "ticker": "STM.PA"
             },
             "Stellantis NV (STLA)": {
                 "name": "Stellantis NV (STLA)",
                 "url": "https://fr.investing.com/equities/fiat?cid=1169015",
-                "ticker": "STLA"
+                "ticker": "STLA.PA"
             },
             "Societe Generale SA (SOGN)": {
                 "name": "Societe Generale SA (SOGN)",
                 "url": "https://fr.investing.com/equities/societe-generale",
-                "ticker": "SOGN"
+                "ticker": "GLE.PA"
             },
             "Veolia (VIE)": {
                 "name": "Veolia (VIE)",
                 "url": "https://fr.investing.com/equities/veolia-environ",
-                "ticker": "VIE"
+                "ticker": "VIE.PA"
             },
             "Compagnie de Saint-Gobain SA (SGOB)": {
                 "name": "Compagnie de Saint-Gobain SA (SGOB)",
                 "url": "https://fr.investing.com/equities/saint-gobain",
-                "ticker": "SGOB"
+                "ticker": "SGO.PA"
             },
             "Renault SA (RENA)": {
                 "name": "Renault SA (RENA)",
                 "url": "https://fr.investing.com/equities/renault",
-                "ticker": "RENA"
+                "ticker": "RNO.PA"
             },
             "Schneider Electric SE (SCHN)": {
                 "name": "Schneider Electric SE (SCHN)",
                 "url": "https://fr.investing.com/equities/schneider-electr",
-                "ticker": "SCHN"
+                "ticker": "SU.PA"
             },
             "Sanofi SA (SASY)": {
                 "name": "Sanofi SA (SASY)",
                 "url": "https://fr.investing.com/equities/sanofi-aventis",
-                "ticker": "SASY"
+                "ticker": "SAN.PA"
             },
             "Orange SA (ORAN)": {
                 "name": "Orange SA (ORAN)",
                 "url": "https://fr.investing.com/equities/france-telecom",
-                "ticker": "ORAN"
+                "ticker": "ORA.PA"
             },
             "Pernod Ricard SA (PERP)": {
                 "name": "Pernod Ricard SA (PERP)",
                 "url": "https://fr.investing.com/equities/pernod-ricard",
-                "ticker": "PERP"
+                "ticker": "RI.PA"
             },
             "Safran SA (SAF)": {
                 "name": "Safran SA (SAF)",
                 "url": "https://fr.investing.com/equities/safran",
-                "ticker": "SAF"
+                "ticker": "SAF.PA"
             },
             "Compagnie G\u00e9n\u00e9rale des Etablissements Michelin SCA (MICP)": {
                 "name": "Compagnie G\u00e9n\u00e9rale des Etablissements Michelin SCA (MICP)",
                 "url": "https://fr.investing.com/equities/michelin",
-                "ticker": "MICP"
+                "ticker": "ML.PA"
             },
             "L'Or\u00e9al SA (OREP)": {
                 "name": "L'Or\u00e9al SA (OREP)",
                 "url": "https://fr.investing.com/equities/l-oreal",
-                "ticker": "OREP"
+                "ticker": "OR.PA"
             },
             "LVMH Moet Hennessy Louis Vuitton SE (LVMH)": {
                 "name": "LVMH Moet Hennessy Louis Vuitton SE (LVMH)",
                 "url": "https://fr.investing.com/equities/l.v.m.h.",
-                "ticker": "LVMH"
+                "ticker": "MC.PA"
             },
             "Herm\u00e8s International SCA (HRMS)": {
                 "name": "Herm\u00e8s International SCA (HRMS)",
                 "url": "https://fr.investing.com/equities/hermes-international",
-                "ticker": "HRMS"
+                "ticker": "RMS.PA"
             },
             "Teleperformance SE (TEPRF)": {
                 "name": "Teleperformance SE (TEPRF)",
                 "url": "https://fr.investing.com/equities/teleperformance",
-                "ticker": "TEPRF"
+                "ticker": "TEP.PA"
             },
             "Kering SA (PRTP)": {
                 "name": "Kering SA (PRTP)",
                 "url": "https://fr.investing.com/equities/kering",
-                "ticker": "PRTP"
+                "ticker": "KER.PA"
             },
             "Publicis Groupe (PUBP)": {
                 "name": "Publicis Groupe (PUBP)",
                 "url": "https://fr.investing.com/equities/publicis-groupe",
-                "ticker": "PUBP"
+                "ticker": "PUB.PA"
             },
             "Dassault Systemes SE (DAST)": {
                 "name": "Dassault Systemes SE (DAST)",
                 "url": "https://fr.investing.com/equities/dassault-system",
-                "ticker": "DAST"
+                "ticker": "DSY.PA"
             },
             "Carrefour SA (CARR)": {
                 "name": "Carrefour SA (CARR)",
                 "url": "https://fr.investing.com/equities/carrefour",
-                "ticker": "CARR"
+                "ticker": "CA.PA"
             },
             "Cr\u00e9dit Agricole SA (CAGR)": {
                 "name": "Cr\u00e9dit Agricole SA (CAGR)",
                 "url": "https://fr.investing.com/equities/credit-agricole",
-                "ticker": "CAGR"
+                "ticker": "ACA.PA"
             },
             "Danone SA (DANO)": {
                 "name": "Danone SA (DANO)",
                 "url": "https://fr.investing.com/equities/danone",
-                "ticker": "DANO"
+                "ticker": "BN.PA"
             },
             "BNP Paribas SA (BNPP)": {
                 "name": "BNP Paribas SA (BNPP)",
                 "url": "https://fr.investing.com/equities/bnp-paribas",
-                "ticker": "BNPP"
+                "ticker": "BNP.PA"
             },
             "Capgemini SE (CAPP)": {
                 "name": "Capgemini SE (CAPP)",
                 "url": "https://fr.investing.com/equities/cap-gemini",
-                "ticker": "CAPP"
+                "ticker": "CAP.PA"
             },
             "AXA SA (AXAF)": {
                 "name": "AXA SA (AXAF)",
                 "url": "https://fr.investing.com/equities/axa",
-                "ticker": "AXAF"
+                "ticker": "CS.PA"
             },
             "Engie SA (ENGIE)": {
                 "name": "Engie SA (ENGIE)",
                 "url": "https://fr.investing.com/equities/gdf-suez",
-                "ticker": "ENGIE"
+                "ticker": "ENGI.PA"
             },
             "ArcelorMittal S.A. (MT)": {
                 "name": "ArcelorMittal S.A. (MT)",
                 "url": "https://fr.investing.com/equities/arcelormittal-reg",
-                "ticker": "MT"
+                "ticker": "MT.AMS"
             },
             "Alstom SA (ALSO)": {
                 "name": "Alstom SA (ALSO)",
                 "url": "https://fr.investing.com/equities/alstom",
-                "ticker": "ALSO"
+                "ticker": "ALO.PA"
             },
             "Legrand SA (LEGD)": {
                 "name": "Legrand SA (LEGD)",
                 "url": "https://fr.investing.com/equities/legrand",
-                "ticker": "LEGD"
+                "ticker": "LR.PA"
             },
             "Airbus Group SE (AIR)": {
                 "name": "Airbus Group SE (AIR)",
                 "url": "https://fr.investing.com/equities/eads",
-                "ticker": "AIR"
+                "ticker": "AIR.PA"
             },
             "EssilorLuxottica SA (ESLX)": {
                 "name": "EssilorLuxottica SA (ESLX)",
                 "url": "https://fr.investing.com/equities/essilor-internat",
-                "ticker": "ESLX"
+                "ticker": "EL.PA"
             },
             "Air Liquide SA (AIRP)": {
                 "name": "Air Liquide SA (AIRP)",
                 "url": "https://fr.investing.com/equities/air-liquide",
-                "ticker": "AIRP"
+                "ticker": "AI.PA"
             },
             "Eurofins Scientific SE (EUFI)": {
                 "name": "Eurofins Scientific SE (EUFI)",
                 "url": "https://fr.investing.com/equities/euro-scientific",
-                "ticker": "EUFI"
+                "ticker": "ERF.PA"
             },
             "Bouygues SA (BOUY)": {
                 "name": "Bouygues SA (BOUY)",
                 "url": "https://fr.investing.com/equities/bouygues",
-                "ticker": "BOUY"
+                "ticker": "EN.PA"
             }
         }
     }

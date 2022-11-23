@@ -25,6 +25,7 @@ namespace efl::sources::yahoo
     {
         std::vector<yahoo_quote_t> quotes;
         std::string url = yahoo_helper::get_quote_path(_yahoo_config, symbol);
+        spdlog::info("Requesting yahoo finance with the following request {}", url);
         std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
 
         spdlog::info("HTTP result = [{}]", result);

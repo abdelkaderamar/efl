@@ -29,16 +29,15 @@ Target_link_libraries ( sqlite_manager_example
    pthread
 )
 
-Add_Executable ( investing_ticker_yahoo_checker
-   investing_ticker_yahoo_checker.cpp
+Add_Executable ( yf_get_quotes
+   yf_get_quotes.cpp
 )
 
-Target_link_libraries ( investing_ticker_yahoo_checker
+Target_link_libraries ( yf_get_quotes
    efl_yahoo strat_sim_lib
-   #efl_persistence 
    pthread)
 
-File ( COPY 
-   ${CMAKE_CURRENT_SOURCE_DIR}/investing-indices.json
-   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+Configure_File (
+   cac40.json 
+   cac40.json
 )
