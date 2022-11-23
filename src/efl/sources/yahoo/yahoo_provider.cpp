@@ -27,7 +27,7 @@ namespace efl::sources::yahoo
         std::string url = yahoo_helper::get_quote_path(_yahoo_config, symbol);
         std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
 
-        spdlog::info("{}", result);
+        spdlog::info("HTTP result = [{}]", result);
 
         auto j = json::parse(result);
 

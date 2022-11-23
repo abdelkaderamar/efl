@@ -167,8 +167,8 @@ namespace efl::util::net
             std::cout << "\n";
 
             // Write whatever content we already have to output.
-            if (_response.size() > 0)
-                std::cout << &_response;
+            // if (_response.size() > 0)
+            //     std::cout << &_response;
 
             // Start reading remaining data until EOF.
             boost::asio::async_read(_socket, _response,
