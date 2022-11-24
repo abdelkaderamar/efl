@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <vector>
 
 #include "yahoo_config.hpp"
@@ -20,5 +21,10 @@ namespace efl::sources::yahoo
 
     private:
         yahoo_config _yahoo_config;
+
+        std::chrono::time_point<std::chrono::system_clock> _last_request_time;
+
+        void check_delay();
+        void set_request_time(); 
     };
 }

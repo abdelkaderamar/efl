@@ -1,7 +1,8 @@
 #include "yahoo_provider.hpp"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <thread>
 
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
@@ -17,12 +18,15 @@ namespace efl::sources::yahoo
     using json = nlohmann::json;
 
     yahoo_provider::yahoo_provider(const yahoo_config config /* = yahoo_config::_default */)
-        : _yahoo_config{config}
+        : _yahoo_config{config},
+        _last_request_time(std::chrono::time_point<std::chrono::system_clock>::min())
     {
     }
 
     std::vector<yahoo_quote_t> yahoo_provider::quote(const std::string &symbol)
     {
+        check_delay();
+
         std::vector<yahoo_quote_t> quotes;
         std::string url = yahoo_helper::get_quote_path(_yahoo_config, symbol);
         spdlog::info("Requesting yahoo finance with the following request {}", url);
@@ -39,7 +43,8 @@ namespace efl::sources::yahoo
         for (json::size_type i = 0; i < r.size(); ++i)
         {
             spdlog::info("***************************************");
-            spdlog::info("{}", r.at(i));
+            spdlog::info("r.at({}) = [{}]", i, r.at(i).dump());
+            spdlog::info("***************************************");
 
             yahoo_quote_t q;
             q.from_json(r.at(i));
@@ -47,6 +52,8 @@ namespace efl::sources::yahoo
 
             spdlog::info("Long name = {}", q.longName);
         }
+
+        set_request_time();
 
         return quotes;
     }
@@ -63,6 +70,7 @@ namespace efl::sources::yahoo
         const date::year_month_day& end
         )
     {
+        check_delay();
         // download/AMC?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true
         // period1=1387324800
         // period2=1652140800
@@ -92,6 +100,26 @@ namespace efl::sources::yahoo
                 spdlog::info("Ignoring {}", line);
             }
         }
+
+        set_request_time();
+
         return histo_data;
+    }
+
+    void yahoo_provider::check_delay() {
+        if (_last_request_time == std::chrono::time_point<std::chrono::system_clock>::min()) {
+            _last_request_time = std::chrono::system_clock::now();
+            return;
+        }
+        const std::chrono::time_point<std::chrono::system_clock> now =
+            std::chrono::system_clock::now();
+        const auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - _last_request_time).count();
+        std::chrono::milliseconds waiting_time{1000-diff}; // TODO make it configurable
+        std::cout << "Waiting for " << waiting_time << std::endl;
+        std::this_thread::sleep_for(waiting_time);
+    }
+
+    void yahoo_provider::set_request_time() {
+        _last_request_time = std::chrono::system_clock::now();
     }
 }
