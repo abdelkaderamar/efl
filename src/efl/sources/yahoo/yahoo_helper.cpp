@@ -3,6 +3,8 @@
 #include <ctime>
 #include <regex>
 
+#include <spdlog/spdlog.h>
+
 namespace efl::sources::yahoo
 {
     std::string yahoo_helper::get_quote_path(yahoo_config &config, const std::string &symbol)
@@ -55,8 +57,11 @@ namespace efl::sources::yahoo
             ohlcv._adj_close = parse_double_value();
             ohlcv._volume = parse_double_value();
         }
+        catch (std::exception& e) {
+            spdlog::error("Parsing error of {}. Exception: {}", str, e.what());
+        }
         catch (...) {
-            // TODO: log error message
+            spdlog::error("Parsing error of {}", str);
         }
         return ohlcv;
     }
