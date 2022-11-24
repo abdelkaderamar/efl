@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include "efl/util/fmt_util.hpp"
+
 namespace efl::sources::yahoo
 {
     bool yahoo_ohlcv_t::is_valid() const {
@@ -29,5 +31,19 @@ namespace efl::sources::yahoo
            << "Adj Close:" << std::left << std::setw(10) << ohlcv._adj_close << "\t"
            << "Volume:" << std::left << std::setw(10) << ohlcv._volume;
         return os;
+    }
+
+    std::string yahoo_ohlcv_t::csv_header() 
+    {
+        return "Date,Open,Low,High,Close,Adj Close,Volume";
+    }
+
+    std::string yahoo_ohlcv_t::to_csv() const 
+    {
+        if (is_valid()) {
+            return fmt::format("{},{},{},{},{},{},{}",
+                _date, _open, _low, _high, _close, _adj_close, _volume);
+        }
+        return std::string();
     }
 }

@@ -115,7 +115,7 @@ namespace efl::sources::yahoo
             std::chrono::system_clock::now();
         const auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - _last_request_time).count();
         std::chrono::milliseconds waiting_time{1000-diff}; // TODO make it configurable
-        std::cout << "Waiting for " << waiting_time << std::endl;
+        std::cout << "Waiting for " << waiting_time.count() << " ms" << std::endl;
         std::this_thread::sleep_for(waiting_time);
     }
 

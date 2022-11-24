@@ -17,6 +17,10 @@ namespace efl::sources::yahoo
         double _volume = 0;
 
         std::string to_string() const;
+        
+        static std::string csv_header();
+
+        std::string to_csv() const;
 
         bool is_valid() const;
     };

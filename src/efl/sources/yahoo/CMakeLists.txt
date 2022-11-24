@@ -8,4 +8,6 @@ add_library ( efl_yahoo
 
 target_link_libraries( efl_yahoo
   efl_net
-  nlohmann_json::nlohmann_json )
+  nlohmann_json::nlohmann_json 
+  fmt::fmt
+  )
