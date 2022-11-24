@@ -41,6 +41,26 @@ CPMAddPackage(
 CPMAddPackage("gh:fmtlib/fmt#9.1.0")
 CPMAddPackage("gh:gabime/spdlog@1.11.0")
 
+CPMAddPackage(
+  NAME googletest
+  GITHUB_REPOSITORY google/googletest
+  GIT_TAG release-1.12.1
+  VERSION 1.12.1
+  OPTIONS "INSTALL_GTEST OFF" "gtest_force_shared_crt"
+)
+
+CPMAddPackage(
+  NAME benchmark
+  GITHUB_REPOSITORY google/benchmark
+  VERSION 1.7.1
+  OPTIONS "BENCHMARK_ENABLE_TESTING Off"
+)
+
+if(benchmark_ADDED)
+  # enable c++11 to avoid compilation errors
+  set_target_properties(benchmark PROPERTIES CXX_STANDARD 11)
+endif()
+
 # CPMAddPackage(
 #   NAME fmt
 #   GIT_TAG 9.1.0
