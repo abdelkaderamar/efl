@@ -5,6 +5,10 @@
 
 namespace efl::sources::yahoo
 {
+    bool yahoo_ohlcv_t::is_valid() const {
+        return _open > 0 && _low > 0 && _high > 0 && _close > 0 && _date.ok();
+    }
+
     std::string yahoo_ohlcv_t::to_string() const
     {
         std::stringstream ss;

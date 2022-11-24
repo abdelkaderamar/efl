@@ -9,14 +9,16 @@ namespace efl::sources::yahoo
 {
     struct yahoo_ohlcv_t {
         date::year_month_day _date;
-        double _open;
-        double _high;
-        double _low;
-        double _close;
-        double _adj_close;
-        double _volume;
+        double _open = 0;
+        double _high = 0;
+        double _low = 0;
+        double _close = 0;
+        double _adj_close = 0;
+        double _volume = 0;
 
         std::string to_string() const;
+
+        bool is_valid() const;
     };
 
     struct yahoo_histo_data_t {

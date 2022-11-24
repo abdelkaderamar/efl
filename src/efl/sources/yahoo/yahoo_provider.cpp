@@ -77,13 +77,20 @@ namespace efl::sources::yahoo
                           // "?period1=1387324800&period2=1652140800&interval=1d&events=history&includeAdjustedClose=true";
         std::string result = efl::util::net::https_client_helper::request(_yahoo_config.host(), url);
         
+        spdlog::info("Result = [{}]", result);
+
         std::stringstream ss;
         ss << result;
         std::string line;
         std::getline(ss, line, '\n'); // header
         while (std::getline(ss, line, '\n')) {
             auto ohlcv = yahoo_helper::parse_histo_data(line);
-            histo_data._data[ohlcv._date] = ohlcv;
+            if (ohlcv.is_valid()) {
+                histo_data._data[ohlcv._date] = ohlcv;
+            }
+            else {
+                spdlog::info("Ignoring {}", line);
+            }
         }
         return histo_data;
     }

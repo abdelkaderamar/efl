@@ -44,15 +44,20 @@ namespace efl::sources::yahoo
             std::getline(is, token, ',');
             return std::stod(token);
         };
-        is << str;
-        std::getline(is, date_str, ',');
-        ohlcv._date = parse_date(date_str);
-        ohlcv._open = parse_double_value();
-        ohlcv._low = parse_double_value();
-        ohlcv._high = parse_double_value();
-        ohlcv._close = parse_double_value();
-        ohlcv._adj_close = parse_double_value();
-        ohlcv._volume = parse_double_value();
+        try {
+            is << str;
+            std::getline(is, date_str, ',');
+            ohlcv._date = parse_date(date_str);
+            ohlcv._open = parse_double_value();
+            ohlcv._low = parse_double_value();
+            ohlcv._high = parse_double_value();
+            ohlcv._close = parse_double_value();
+            ohlcv._adj_close = parse_double_value();
+            ohlcv._volume = parse_double_value();
+        }
+        catch (...) {
+            // TODO: log error message
+        }
         return ohlcv;
     }
 
