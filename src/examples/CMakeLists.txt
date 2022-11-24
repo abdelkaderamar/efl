@@ -12,11 +12,11 @@ Add_Executable ( yahoo_finance_request
 Target_link_libraries ( yahoo_finance_request
    efl_net pthread)
 
-Add_Executable ( yahoo_provider_example 
-   yahoo_provider_example.cpp 
+Add_Executable ( yf_get_histo_data 
+   yf_get_histo_data.cpp 
 )
 
-Target_link_libraries ( yahoo_provider_example
+Target_link_libraries ( yf_get_histo_data
    efl_yahoo strat_sim_lib pthread)
 
 Add_Executable ( sqlite_manager_example 
