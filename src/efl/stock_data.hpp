@@ -8,11 +8,11 @@
 namespace efl {
 
   struct ohlc_t {
-    double open;
-    double high;
-    double low;
-    double close;
-    double volume;
+    double open = 0.0;
+    double high = 0.0;
+    double low = 0.0;
+    double close = 0.0;
+    double volume = 0.0;
     date::year_month_day date;
   };
 
