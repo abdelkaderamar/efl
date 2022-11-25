@@ -6,13 +6,13 @@
 namespace efl {
 
   struct book_config_t {
-    double total_amount;
-    double order_amount;
-    double delta_buy;
-    double delta_sell;
-    double fees;
-    double tax;
-    int empty_book_duration;
+    double total_amount = 0.0;
+    double order_amount = 0.0;
+    double delta_buy = 0.0;
+    double delta_sell = 0.0;
+    double fees = 0.0;
+    double tax = 0.0;
+    int empty_book_duration = 0;
 
     std::string to_csv() const;
 

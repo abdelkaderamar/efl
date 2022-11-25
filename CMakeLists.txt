@@ -28,7 +28,8 @@ endif()
 Find_Package (Boost REQUIRED 
    system)
 
-include(cmake/CPM.cmake)
+include (cmake/CPM.cmake)
+include (cmake/CodeCoverage.cmake)
 
 
 CPMAddPackage(
@@ -61,34 +62,38 @@ if(benchmark_ADDED)
   set_target_properties(benchmark PROPERTIES CXX_STANDARD 11)
 endif()
 
-# CPMAddPackage(
-#   NAME fmt
-#   GIT_TAG 9.1.0
-#   GITHUB_REPOSITORY fmtlib/fmt
-#   OPTIONS "FMT_INSTALL YES" # create an installable target
+# include(FetchContent)
+
+# FetchContent_Declare(ftxui
+#   GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+#   GIT_TAG v3.0.0
 # )
 
-# CPMAddPackage(
-#   NAME spdlog
-#   GITHUB_REPOSITORY gabime/spdlog
-#   VERSION 1.11.0
-#   OPTIONS "SPDLOG_FMT_EXTERNAL 1"
-# )
+# FetchContent_GetProperties(ftxui)
+# if(NOT ftxui_POPULATED)
+#   FetchContent_Populate(ftxui)
+#   add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
+# endif()
 
-include(FetchContent)
+#--- options
+OPTION( EFL_TEST       "Build EFL tests." OFF )
+OPTION( EFL_COVERAGE   "Build EFL for coverage." OFF )
 
-FetchContent_Declare(ftxui
-  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
-  GIT_TAG v3.0.0
-)
+If ( EFL_COVERAGE )
+  APPEND_COVERAGE_COMPILER_FLAGS()
+Endif ( EFL_COVERAGE )
 
-FetchContent_GetProperties(ftxui)
-if(NOT ftxui_POPULATED)
-  FetchContent_Populate(ftxui)
-  add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
-endif()
+setup_target_for_coverage_lcov (
+  NAME efl_coverage
+  EXECUTABLE efl_tests
+  EXCLUDE "${PROJECT_SOURCE_DIR}/test/*" "${PROJECT_BINARY_DIR}/_deps/*" "/usr/local/*" "/usr/*" 
+          "${PROJECT_SOURCE_DIR}/src/efl/date.h"
+          "${PROJECT_SOURCE_DIR}/src/efl/csv.h"
+  )
 
 Include_Directories (${CMAKE_SOURCE_DIR}/src)
 
 add_subdirectory ( src )
+
+add_subdirectory ( test )
 

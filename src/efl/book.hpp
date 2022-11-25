@@ -12,8 +12,8 @@
 namespace efl {
 
   struct book_row_t {
-    double price;
-    int qty;
+    double price = 0.0;
+    int qty = 0;
     date::year_month_day date;
     bool operator<(const book_row_t& other) const { return price < other.price; }
     std::string to_csv() const;
@@ -22,9 +22,9 @@ namespace efl {
   std::ostream& operator<<(std::ostream& os, const book_row_t& row);
 
   struct trade_t {
-    double buy_price;
-    double sell_price;
-    int qty;
+    double buy_price = 0.0;
+    double sell_price = 0.0;
+    int qty = 0;
     date::year_month_day date;
     std::string to_csv() const;
   };
@@ -65,6 +65,7 @@ namespace efl {
       return get_min().price;
     }
 
+    const double& current_notional() const { return _current_notional; }
     const double& last_buy_price() const { return _last_buy_price; }
     const double& last_sell_price() const { return _last_sell_price; }
     const double& last_share_price() const { return _last_share_price; }
@@ -109,7 +110,7 @@ namespace efl {
     double _last_sell_price;
     date::year_month_day _last_sell_date;
     std::vector<trade_t> _trades;
-    double _last_share_price;
+    double _last_share_price = 0.0;
     double _max_book_buy_value;
     double _trade_pnl, _book_pnl, _pnl;
   };
