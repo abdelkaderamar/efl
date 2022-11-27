@@ -81,15 +81,17 @@ OPTION( EFL_COVERAGE   "Build EFL for coverage." OFF )
 
 If ( EFL_COVERAGE )
   APPEND_COVERAGE_COMPILER_FLAGS()
-Endif ( EFL_COVERAGE )
+  
+  Setup_Target_For_Coverage_LCOV (
+    NAME efl_coverage
+    EXECUTABLE efl_tests
+    EXCLUDE "${PROJECT_SOURCE_DIR}/test/*" "${PROJECT_BINARY_DIR}/_deps/*" "/usr/local/*" "/usr/*" 
+            "${PROJECT_SOURCE_DIR}/src/efl/date.h"
+            "${PROJECT_SOURCE_DIR}/src/efl/csv.h"
+    )
+  
+    Endif ( EFL_COVERAGE )
 
-setup_target_for_coverage_lcov (
-  NAME efl_coverage
-  EXECUTABLE efl_tests
-  EXCLUDE "${PROJECT_SOURCE_DIR}/test/*" "${PROJECT_BINARY_DIR}/_deps/*" "/usr/local/*" "/usr/*" 
-          "${PROJECT_SOURCE_DIR}/src/efl/date.h"
-          "${PROJECT_SOURCE_DIR}/src/efl/csv.h"
-  )
 
 Include_Directories (${CMAKE_SOURCE_DIR}/src)
 
