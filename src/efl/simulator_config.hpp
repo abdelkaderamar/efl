@@ -11,9 +11,9 @@ using json = nlohmann::json;
 namespace efl {
 
   struct interval_t {
-    double min;
-    double max;
-    double step;
+    double min = 0;
+    double max = 0;
+    double step = 1;
   };
 
   struct simulator_config_t {
