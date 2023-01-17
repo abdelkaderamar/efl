@@ -1,5 +1,7 @@
 #include "efl/simulator_config.hpp"
 
+#include <iostream>
+
 #include <gtest/gtest.h>
 
 TEST(interval, ctor) 
@@ -74,4 +76,65 @@ TEST(simulator_config, generate_book_configs)
     auto v = efl::generate_book_config(sim_config);
 
     EXPECT_EQ(1, v.size());
+}
+
+TEST(simulator_config, dynamic_parameters)  
+{
+    auto j = R"(
+{
+    "total_amount_type": "capped",
+    "total_amount":
+    {
+        "min": 1000,
+        "max": 1000,
+        "step": 1000
+    },
+    "order_amount":
+    {
+        "min": 200,
+        "max": 1000,
+        "step": 200
+    },
+    "delta_buy_type": "fixed",
+    "delta_buy_value":
+    {
+        "min": 1,
+        "max": 1,
+        "step": 1
+    },
+    "delta_sell_type": "fixed",
+    "delta_sell_value":
+    {
+        "min": 1,
+        "max": 1,
+        "step": 1
+    },
+    "empty_book_duration":
+    {
+        "min": 1,
+        "max": 1,
+        "step": 1
+    },
+    "fees": 0.5,
+    "tax": 0.3,
+    "param1": 1.11,
+    "param2": "test",
+    "param3": {
+        "k1": "v1",
+        "k2": "v2"
+    }
+
+}
+    )"_json;
+
+    efl::simulator_config_t sim_config;
+    efl::from_json(j, sim_config);
+
+    EXPECT_EQ(0.5, sim_config.fees);
+    EXPECT_EQ(0.3, sim_config.tax);
+
+    EXPECT_EQ(1.11, sim_config.dyn_params_number["param1"]);
+    EXPECT_EQ("test", sim_config.dyn_params_string["param2"]);
+    EXPECT_EQ("v1", sim_config.dyn_params_json["param3"]["k1"]);
+    EXPECT_EQ("v2", sim_config.dyn_params_json["param3"]["k2"]);
 }

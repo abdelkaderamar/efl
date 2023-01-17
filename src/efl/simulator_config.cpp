@@ -1,6 +1,42 @@
 #include "simulator_config.hpp"
+#include <iostream>
 
 namespace efl {
+
+  const std::vector<std::string> simulator_config_t::STATIC_FIELDS = {
+      "total_amount_type",
+      "total_amount",
+      "order_amount",
+      "delta_buy_type",
+      "delta_buy_value",
+      "delta_sell_type",
+      "delta_sell_value",
+      "empty_book_duration",
+      "fees",
+      "tax"
+    };
+
+  void parse_dynamic_params(const json& j, simulator_config_t& cfg) {
+    for (auto &elt : j.items())
+    {
+      if (std::find(simulator_config_t::STATIC_FIELDS.begin(), simulator_config_t::STATIC_FIELDS.end(), elt.key()) ==
+          simulator_config_t::STATIC_FIELDS.end())
+      {
+        if (elt.value().is_number()) {
+          std::cout << "Adding a number " << elt.key() << " = " << elt.value() << std::endl;
+          cfg.dyn_params_number[elt.key()] = elt.value();
+        }
+        else if (elt.value().is_string()) {
+          std::cout << "Adding a string " << elt.key() << " = " << elt.value() << std::endl;
+          cfg.dyn_params_string[elt.key()] = elt.value();
+        }
+        else if (elt.value().is_object()) {
+          std::cout << "Adding a json " << elt.key() << " = " << elt.value() << std::endl;
+          cfg.dyn_params_json[elt.key()] = elt.value();
+        }
+      }
+    }
+  }
 
   void to_json(json& j, const interval_t& interval)
   {
@@ -46,6 +82,7 @@ namespace efl {
     j.at("empty_book_duration").get_to(cfg.empty_book_duration);
     j.at("fees").get_to(cfg.fees);
     j.at("tax").get_to(cfg.tax);
+    parse_dynamic_params(j, cfg);
   }
 
   std::vector<book_config_t> generate_book_config(const simulator_config_t &cfg)

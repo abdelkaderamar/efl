@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+#include <string>
 #include <vector>
 
 #include <nlohmann/json.hpp>
@@ -17,6 +19,8 @@ namespace efl {
   };
 
   struct simulator_config_t {
+    static const std::vector<std::string> STATIC_FIELDS;
+
     std::string total_amount_type;
     interval_t total_amount;
     interval_t order_amount;
@@ -29,6 +33,10 @@ namespace efl {
     double tax;
 
     std::string filename;
+
+    std::map<std::string, double> dyn_params_number;
+    std::map<std::string, std::string> dyn_params_string;
+    std::map<std::string, json> dyn_params_json;
   };
 
 
