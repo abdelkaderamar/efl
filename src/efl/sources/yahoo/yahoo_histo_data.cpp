@@ -42,7 +42,7 @@ namespace efl::sources::yahoo
     }
 
     std::string yahoo_ohlcv_t::to_csv() const 
-    {q
+    {
         if (is_valid()) {
             return fmt::format("{},{},{},{},{},{},{}",
                 _date, _open, _low, _high, _close, _adj_close, _volume);
