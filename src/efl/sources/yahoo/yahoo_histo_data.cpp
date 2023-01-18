@@ -3,6 +3,9 @@
 #include <iomanip>
 #include <sstream>
 
+#include <spdlog/spdlog.h>
+
+#include "efl/sources/yahoo/yahoo_helper.hpp"
 #include "efl/util/fmt_util.hpp"
 
 namespace efl::sources::yahoo
@@ -39,11 +42,46 @@ namespace efl::sources::yahoo
     }
 
     std::string yahoo_ohlcv_t::to_csv() const 
-    {
+    {q
         if (is_valid()) {
             return fmt::format("{},{},{},{},{},{},{}",
                 _date, _open, _low, _high, _close, _adj_close, _volume);
         }
         return std::string();
+    }
+
+    void yahoo_ohlcv_t::from_csv(const std::string& line, char separator /*=  ','*/) {
+        std::array<std::string, 7> tokens;
+        ushort idx = 0;
+        std::stringstream ss{line};
+        std::string token;
+        while (std::getline(ss, token, separator)) {
+            tokens[idx++] = token;
+            if (idx == tokens.size()) {
+                break;
+            }
+        }
+
+        idx = 0;
+        spdlog::debug("[{}]", tokens[idx]);
+        _date = yahoo_helper::parse_date(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _open = std::stod(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _low = std::stod(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _high = std::stod(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _close = std::stod(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _adj_close = std::stod(tokens[idx++]);
+
+        spdlog::debug("[{}]", tokens[idx]);
+        _volume = std::stod(tokens[idx++]);
     }
 }

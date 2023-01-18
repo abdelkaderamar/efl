@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     json data = json::parse(f);
 
     date::year_month_day start_date{date::year(2000), date::month(1), date::day(1)};
-    date::year_month_day end_date{date::year(2022), date::month(11), date::day(1)};
+    date::year_month_day end_date{date::year(2023), date::month(1), date::day(1)};
 
     auto download_histo_data = [&provider, &start_date, &end_date](const std::string& symbol) {
         auto histo_data = provider.histo(symbol, start_date, end_date);

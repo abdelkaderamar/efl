@@ -1,9 +1,12 @@
 #include "yahoo_helper.hpp"
 
 #include <ctime>
+#include <fstream>
 #include <regex>
 
 #include <spdlog/spdlog.h>
+
+#include "efl/util/fmt_util.hpp"
 
 namespace efl::sources::yahoo
 {
@@ -32,7 +35,7 @@ namespace efl::sources::yahoo
                 return date::year_month_day{year, month, day};
             }
         }
-
+        spdlog::warn("Cannot parse this date {}", str);
         return date::year_month_day{};
     }
 
@@ -81,5 +84,28 @@ namespace efl::sources::yahoo
         return "?period1=" + std::to_string(get_epoch(start)) + 
                "&period2=" + std::to_string(get_epoch(end)) + 
                "&interval=1d&events=history&includeAdjustedClose=true";
+    }
+
+    yahoo_histo_data_t yahoo_helper::parse_histo_csv_file(const std::string& symbol, const std::string& filename)
+    {
+        yahoo_histo_data_t histo_data{symbol};
+        std::ifstream csv_file(filename, std::ifstream::in);
+        if (csv_file.is_open())
+        {
+            std::string line;
+            // Skip the header
+            std::getline(csv_file, line);
+            while (std::getline(csv_file, line)) {
+                yahoo_ohlcv_t ohlcv;
+                ohlcv.from_csv(line);
+                histo_data._data[ohlcv._date] = ohlcv;
+                spdlog::info("data size {}", histo_data._data.size());
+                spdlog::info("{}", ohlcv._date);
+            }
+            csv_file.close();
+        }
+        else spdlog::error("File [{}] cannot be opened", filename);
+
+        return histo_data;
     }
 }

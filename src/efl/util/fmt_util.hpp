@@ -20,7 +20,7 @@ namespace fmt
         template <typename FormatContext>
         FormatContext::iterator format(date::year_month_day const &ymd, FormatContext &ctx)
         {
-            return fmt::format_to(ctx.out(), "{0}/{1}/{2}",
+            return fmt::format_to(ctx.out(), "{:04d}-{:02d}-{:02d}",
                                   int(ymd.year()),
                                   static_cast<unsigned>(ymd.month()),
                                   static_cast<unsigned>(ymd.day()));

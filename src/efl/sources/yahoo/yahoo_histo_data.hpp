@@ -22,6 +22,8 @@ namespace efl::sources::yahoo
 
         std::string to_csv() const;
 
+        void from_csv(const std::string& line, char separator =  ',');
+
         bool is_valid() const;
     };
 

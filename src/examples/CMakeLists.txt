@@ -48,3 +48,12 @@ Target_link_libraries ( yf_get_quotes
    efl_yahoo strat_sim_lib
    pthread)
 
+
+###################
+# yf_read_ohlcv_file
+Add_Executable ( yf_read_ohlcv_file
+yf_read_ohlcv_file.cpp
+)
+Target_link_libraries ( yf_read_ohlcv_file
+efl_yahoo strat_sim_lib
+pthread)

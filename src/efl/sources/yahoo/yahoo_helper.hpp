@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "yahoo_config.hpp"
 #include "yahoo_histo_data.hpp"
@@ -23,5 +24,7 @@ namespace efl::sources::yahoo
 
         static std::string get_histo_request(const std::string &symbol, const date::year_month_day &start,
                                            const date::year_month_day &end);
+
+        static yahoo_histo_data_t parse_histo_csv_file(const std::string& symbol, const std::string &filename);
     };
 }
