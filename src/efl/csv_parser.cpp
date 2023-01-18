@@ -27,9 +27,9 @@ namespace efl {
     }
   }
 
-  std::map<date::year_month_day, ohlc_t> csv_parser::parse(const std::string& filename) {
+  std::map<date::year_month_day, ohlcv_t> csv_parser::parse(const std::string& filename) {
 
-    std::map<date::year_month_day, ohlc_t> data;
+    std::map<date::year_month_day, ohlcv_t> data;
 
     io::CSVReader<7,
                   io::trim_chars<' ', '\t'> ,
@@ -69,17 +69,17 @@ namespace efl {
       spdlog::info("Close = {}, Open = {}, High = {}, Low = {}, Volume = {}, Variation = {}",
         close, open, high, low, volume, variation);
 
-      ohlc_t day_data
+      ohlcv_t day_data
         {
-         .open = open,
-         .high = high,
-         .low = low,
-         .close = close,
-         .volume = volume,
-         .date = date
+         ._open = open,
+         ._high = high,
+         ._low = low,
+         ._close = close,
+         ._volume = volume,
+         ._date = date
         };
 
-      data[day_data.date] = day_data;
+      data[day_data._date] = day_data;
     }
 
     return data;

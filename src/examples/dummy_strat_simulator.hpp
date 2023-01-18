@@ -24,10 +24,10 @@ namespace efl
 
         void generate_output() override;
 
-        bool buy_signal(ohlc_t mkt_data, const book_config_t& cfg,
+        bool buy_signal(ohlcv_t mkt_data, const book_config_t& cfg,
                             const book_t& b) override;
         
-        bool sell_signal(ohlc_t mkt_data, const book_config_t& cfg,
+        bool sell_signal(ohlcv_t mkt_data, const book_config_t& cfg,
                              const book_t& b) override;
 
     protected:

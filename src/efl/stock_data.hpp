@@ -7,44 +7,44 @@
 
 namespace efl {
 
-  struct ohlc_t {
-    double open = 0.0;
-    double high = 0.0;
-    double low = 0.0;
-    double close = 0.0;
-    double volume = 0.0;
-    date::year_month_day date;
+  struct ohlcv_t {
+    double _open = 0.0;
+    double _high = 0.0;
+    double _low = 0.0;
+    double _close = 0.0;
+    double _volume = 0.0;
+    date::year_month_day _date;
   };
 
   class stock_data_t {
   public:
-    stock_data_t(const std::string& filename,
-               std::map<date::year_month_day, ohlc_t> data) :
-      _filename{filename},
+    stock_data_t(const std::string& stock_id,
+               std::map<date::year_month_day, ohlcv_t> data) :
+      _stock_id{stock_id},
       _data{data}
     {}
 
-    const std::string& get_filename() const { return _filename; }
+    const std::string& get_stock_id() const { return _stock_id; }
 
     const bool is_valid() const { return _data.size() > 0; }
 
-    const std::map<date::year_month_day, ohlc_t> get_data() const { return _data; }
+    const std::map<date::year_month_day, ohlcv_t> get_data() const { return _data; }
 
     const date::year_month_day start_period() const { return _data.begin()->first; }
     const date::year_month_day end_period() const { return _data.rbegin()->first; }
 
-    const double start_period_price () const { return _data.begin()->second.close; }
-    const double end_period_price() const { return _data.rbegin()->second.close; }
+    const double start_period_price () const { return _data.begin()->second._close; }
+    const double end_period_price() const { return _data.rbegin()->second._close; }
 
     const double price_change() const { return end_period_price() / start_period_price(); }
 
     double variation() const;
 
-    void add_ohlc(const ohlc_t& data);
+    void add_ohlc(const ohlcv_t& data);
 
   private:
-    std::string _filename;
-    std::map<date::year_month_day, ohlc_t> _data;
+    std::string _stock_id;
+    std::map<date::year_month_day, ohlcv_t> _data;
   };
 
 }

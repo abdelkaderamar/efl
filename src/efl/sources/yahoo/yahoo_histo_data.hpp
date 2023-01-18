@@ -4,17 +4,12 @@
 #include <string>
 
 #include "efl/date.h"
+#include "efl/stock_data.hpp"
 
 namespace efl::sources::yahoo
 {
-    struct yahoo_ohlcv_t {
-        date::year_month_day _date;
-        double _open = 0;
-        double _high = 0;
-        double _low = 0;
-        double _close = 0;
+    struct yahoo_ohlcv_t : public ohlcv_t {
         double _adj_close = 0;
-        double _volume = 0;
 
         std::string to_string() const;
         

@@ -25,7 +25,7 @@ namespace efl {
       {
         for (const auto &book_cfg : book_configs)
         {
-          config_result_t config_result{d.get_filename()};
+          config_result_t config_result{d.get_stock_id()};
           config_result._config = book_cfg;
           auto b = simulate(d, book_cfg);
           period_result_t period_result{
@@ -35,7 +35,7 @@ namespace efl {
               ._price_change = d.price_change(),
           };
           result_key_t key{
-              ._stock = d.get_filename(),
+              ._stock = d.get_stock_id(),
               ._start = d.start_period(),
               ._end = d.end_period(),
           };
@@ -53,16 +53,16 @@ namespace efl {
     auto &data = sd.get_data();
     for (auto &d : data)
     {
-      b->set_last_share_price(d.second.close);
+      b->set_last_share_price(d.second._close);
       spdlog::debug("Processing data of {}", d.first);
       if (buy_signal(d.second, book_cfg, *b))
       {
-        buy(*b, book_cfg, d.second.close, d.first);
+        buy(*b, book_cfg, d.second._close, d.first);
       }
       else if (sell_signal(d.second, book_cfg, *b))
       {
         double min_price = b->get_min_price();
-        sell(*b, book_cfg, min_price, d.second.close, d.first);
+        sell(*b, book_cfg, min_price, d.second._close, d.first);
       }
     }
 

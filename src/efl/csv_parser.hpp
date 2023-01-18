@@ -21,7 +21,7 @@ namespace efl {
     }
 
     void parse(std::istream& is);
-    std::map<date::year_month_day, ohlc_t> parse(const std::string& filename);
+    std::map<date::year_month_day, ohlcv_t> parse(const std::string& filename);
 
     static void clean_token(std::string& str, bool is_numeric = false);
 

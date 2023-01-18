@@ -33,9 +33,9 @@ namespace efl {
                       const double& sell_price,
                       const date::year_month_day& date);
 
-    virtual bool buy_signal(ohlc_t mkt_data, const book_config_t& cfg,
+    virtual bool buy_signal(ohlcv_t mkt_data, const book_config_t& cfg,
                             const book_t& b) = 0;
-    virtual bool sell_signal(ohlc_t mkt_data, const book_config_t& cfg,
+    virtual bool sell_signal(ohlcv_t mkt_data, const book_config_t& cfg,
                              const book_t& b) = 0;
 
   protected:
